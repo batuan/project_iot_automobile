@@ -1,0 +1,127 @@
+{
+    "BROKER_URL": "0.0.0.0",
+    "BROKER_PORT": 1883,
+    "TOPICS": [
+        {
+            "TYPE": "multiple",
+            "PREFIX": "cars",
+            "RANGE_START": 1,
+            "RANGE_END": 10,
+            "TIME_INTERVAL": 1,
+            "DATA": [
+                {
+                    "NAME": "gpsSpeed",
+                    "TYPE": "float",
+                    "MIN_VALUE": 0,
+                    "MAX_VALUE": 87.06,
+                    "MAX_STEP": 0.1,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "gpsSatCount",
+                    "TYPE": "int",
+                    "MIN_VALUE": 0,
+                    "MAX_VALUE": 255,
+                    "MAX_STEP": 2,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Gear",
+                    "TYPE": "int",
+                    "MIN_VALUE": 124,
+                    "MAX_VALUE": 137,
+                    "MAX_STEP": 1,
+                    "RETAIN_PROBABILITY": 0.5
+                },
+                {
+                    "NAME": "Brake_pedal",
+                    "TYPE": "int",
+                    "MIN_VALUE": 124,
+                    "MAX_VALUE": 137,
+                    "MAX_STEP": 1,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Accel_pedal",
+                    "TYPE": "int",
+                    "MIN_VALUE": 0,
+                    "MAX_VALUE": 100,
+                    "MAX_STEP": 5,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Machine_Speed_Mesured",
+                    "TYPE": "int",
+                    "MIN_VALUE": 20,
+                    "MAX_VALUE": 20,
+                    "MAX_STEP": 0,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "AST_Direction",
+                    "TYPE": "int",
+                    "MIN_VALUE": 20,
+                    "MAX_VALUE": 20,
+                    "MAX_STEP": 0,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Ast_HPMB1_Pressure_bar",
+                    "TYPE": "int",
+                    "MIN_VALUE": 0,
+                    "MAX_VALUE": 13,
+                    "MAX_STEP": 1,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Ast_HPMA_Pressure_bar",
+                    "TYPE": "int",
+                    "MIN_VALUE": 0,
+                    "MAX_VALUE": 13,
+                    "MAX_STEP": 1,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Pressure_HighPressureReturn",
+                    "TYPE": "int",
+                    "MIN_VALUE": 0,
+                    "MAX_VALUE": 13,
+                    "MAX_STEP": 1,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Pressure_HighPressure",
+                    "TYPE": "int",
+                    "MIN_VALUE": 32767,
+                    "MAX_VALUE": 33195,
+                    "MAX_STEP": 20,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Oil_Temperature",
+                    "TYPE": "int",
+                    "MIN_VALUE": 11,
+                    "MAX_VALUE": 255,
+                    "MAX_STEP": 10,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Ast_FrontAxleSpeed_Rpm",
+                    "TYPE": "int",
+                    "MIN_VALUE": 32767,
+                    "MAX_VALUE": 33195,
+                    "MAX_STEP": 20,
+                    "RETAIN_PROBABILITY": 0.25
+                },
+                {
+                    "NAME": "Pump_Speed",
+                    "TYPE": "int",
+                    "MIN_VALUE": 577,
+                    "MAX_VALUE": 1799,
+                    "MAX_STEP": 20,
+                    "RETAIN_PROBABILITY": 0.25
+                }
+            ]
+        }
+    ]
+}
