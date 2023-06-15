@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  nifi:
+    image: apache/nifi:latest
+    container_name: nifi
+    ports:
+      - 8080:8080
+      - 8443:8443
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=Thaibatuan97
+    volumes:
+      # mkdir nifi-data && chown -R 1000:1000 nifi-data
+      - nifi_certs:/opt/certs
+      - nifi0_conf:/opt/nifi/nifi-current/conf
+      - nifi0_extensions:/opt/nifi/nifi-current/extensions
+      - nifi0_database_repository:/opt/nifi/nifi-current/database_repository
+      - nifi0_flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
+      - nifi0_content_repository:/opt/nifi/nifi-current/content_repository
+      - nifi0_provenance_repository:/opt/nifi/nifi-current/provenance_repository
+      - nifi0_state:/opt/nifi/nifi-current/state
+      - nifi0_logs:/opt/nifi/nifi-current/logs
+    restart: unless-stopped
+volumes:
+  nifi_certs:
+  # nifi 0
+  nifi0_conf:
+  nifi0_extensions:
+  nifi0_database_repository:
+  nifi0_flowfile_repository:
+  nifi0_content_repository:
+  nifi0_provenance_repository:
+  nifi0_state:
+  nifi0_logs:
+
+
+

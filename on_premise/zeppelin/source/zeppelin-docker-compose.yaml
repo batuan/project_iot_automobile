@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  zeppelin:
+    image: apache/zeppelin:0.10.1
+    container_name: zeppelin
+    ports:
+      - 8080:8080
+    volumes:
+      - zeppelin-notebooks:/opt/zeppelin/notebook
+      - zeppelin-logs:/opt/zeppelin/logs
+      - zeppelin-plugins:/opt/zeppelin/plugins
+      - zeppelin-conf:/opt/zeppelin/conf
+    # environment:
+    #   - ZEPPELIN_HELIUM_REGISTRY=helium,https://s3.amazonaws.com/helium-package/helium.json
+    restart: unless-stopped
+
+volumes:
+  zeppelin-notebooks:
+  zeppelin-logs:
+  zeppelin-plugins:
+  zeppelin-conf:

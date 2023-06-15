@@ -1,0 +1,4 @@
+notebook
+findspark
+pyspark
+kafka-python
