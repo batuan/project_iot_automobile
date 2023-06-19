@@ -34,6 +34,7 @@ resource "google_bigquery_dataset" "bronze_dataset" {
 resource "google_bigquery_table" "cars_sensor_table" {
   dataset_id = google_bigquery_dataset.bronze_dataset.dataset_id
   table_id   = var.BRONZE_IOT_RAW_TABLE
+  deletion_protection = false
   
   time_partitioning {
     type = "HOUR"
@@ -43,10 +44,34 @@ resource "google_bigquery_table" "cars_sensor_table" {
   schema = file("./table_schema/raw_iot.json")
 }
 
+resource "google_bigquery_table" "france_geo_info" {
+  dataset_id = google_bigquery_dataset.bronze_dataset.dataset_id
+  table_id   = var.BRONZE_FRANCE_GEO_INFO
+  deletion_protection = false
 
+  # schema = file("./table_schema/france_geo_info.json")
+
+  provisioner "local-exec" {
+    command = "bq load --source_format=PARQUET ${google_bigquery_table.france_geo_info.dataset_id}.${google_bigquery_table.france_geo_info.table_id} ./table_resource/france_departement_info.parquet"
+  }
+}
+
+resource "google_bigquery_table" "car_information" {
+  dataset_id = google_bigquery_dataset.bronze_dataset.dataset_id
+  table_id   = var.BRONZE_CAR_INFORMATION
+  deletion_protection = false
+  
+  # schema = file("./table_schema/car_information.json")
+  provisioner "local-exec" {
+    command = "bq load --source_format=PARQUET ${google_bigquery_table.car_information.dataset_id}.${google_bigquery_table.car_information.table_id} ./table_resource/car_information.parquet"
+  }
+}
+
+
+# Bucket
 resource "google_storage_bucket" "bucket1" {
     name          = "sensor-cars-test-bucket1"
-    location      = "europe-west9"
+    location      = "europe-west3"
     force_destroy = true
 }
 resource "google_storage_bucket_object" "tmp_directory" {
@@ -54,7 +79,6 @@ resource "google_storage_bucket_object" "tmp_directory" {
   bucket     = google_storage_bucket.bucket1.name
   content = " "
 }
-
 
 # resource "google_dataflow_job" "pubsub_stream" {
 #     name = "realtime-sensors-dataflow-job1"
@@ -73,12 +97,13 @@ module "dataflow" {
   source  = "terraform-google-modules/dataflow/google"
   version = "2.2.0"
 
-  project_id  = "data-iot-poei-project"
-  name = "realtime-sensors-dataflow-job1"
+  project_id  = var.project
+  name = var.DATAFLOW_JOB_NAME #+ "_${timestamp()}"
   on_delete = "drain"
-  region = "europe-west9"
+  region = "europe-west3"
+  zone = "europe-west3-a"
   max_workers = 1
-  template_gcs_path =  "gs://dataflow-templates-europe-west9/latest/PubSub_Subscription_to_BigQuery"
+  template_gcs_path =  "gs://dataflow-templates-europe-west3/latest/PubSub_Subscription_to_BigQuery"
   temp_gcs_location = google_storage_bucket_object.tmp_directory.name
   parameters = {
         inputSubscription = "projects/data-iot-poei-project/subscriptions/my-cars-sensor-subscription"

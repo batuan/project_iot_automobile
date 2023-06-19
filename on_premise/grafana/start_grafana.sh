@@ -22,7 +22,6 @@ export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
 #install mage
-
 git clone https://github.com/magefile/mage ~/mage
 cd ~/mage
 go run bootstrap.go

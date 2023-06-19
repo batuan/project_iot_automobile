@@ -1,0 +1,1 @@
+SELECT * FROM `data-iot-poei-project.bronze_dataset.raw_stream_iot_data_table` WHERE DATE(dateHour) >= "2023-06-01" LIMIT 1000

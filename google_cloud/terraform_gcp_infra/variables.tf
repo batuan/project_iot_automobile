@@ -18,9 +18,9 @@ variable "storage_class" {
   default = "STANDARD"
 }
 
-
-variable ""{
-
+variable "dataflow_job"{
+  description = "job name for dataflow"
+  default = "raw_stream_1"
 }
 
 # BigQuery Dataset
@@ -60,4 +60,9 @@ variable "BRONZE_FRANCE_GEO_INFO" {
   description = "BigQuery table that raw data (from GCS) will be written to"
   type = string
   default = "france_geo_info"
+}
+
+variable "DATAFLOW_JOB_NAME" {
+  description = "job name for dataflow"
+  type = string
 }
